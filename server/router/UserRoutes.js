@@ -92,4 +92,10 @@ router.post('/login',[
     }
 })
 
+// Logout User
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.json({message: 'User Logged Out'});
+})
+
 module.exports = router;
