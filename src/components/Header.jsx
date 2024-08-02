@@ -1,18 +1,36 @@
-const data = [{id: 1,tab: "completed",},{id: 2,tab: "todo",},{id: 3,tab: "all",},];
+import { FaSun } from "react-icons/fa6";
+import { FaMoon } from "react-icons/fa";
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
 
 const Header = () => {
-    const darkModeToggle = () => {
-        const html = document.querySelector('html');
-        html.classList.toggle('dark');
-    }
+  const { theme, darkModeToggle, handleTabs } = useContext(DataContext);
+
   return (
-    <div className="flex fixed top-4 left-0 right-0 justify-center items-center container mx-auto dark:bg-slate-950 rounded-xl border w-1/2 shadow-xl">
-        {data.map((item) => (
-            <div key={item.id} className="p-2 cursor-pointer uppercase">
-            {item.tab}
-            </div>
-        ))}
-        <button className="button" onClick={()=>darkModeToggle()}>darkMode</button>
+    <div className="flex fixed top-3 left-0 right-0 justify-center items-center mx-auto rounded-xl border md:w-1/2 w-[90%] shadow-xl">
+      <div
+        className="p-3 cursor-pointer uppercase"
+        onClick={() => handleTabs("all")}
+      >
+        all tasks
+      </div>
+      <div
+        className="p-3 cursor-pointer uppercase"
+        onClick={() => handleTabs("active")}
+      >
+        active tasks
+      </div>
+      <div
+        className="p-3 cursor-pointer uppercase"
+        onClick={() => handleTabs("completed")}
+      >
+        completed
+      </div>
+      <div className="fixed right-10">
+        <button className="p-2 cursor-pointer" onClick={() => darkModeToggle()}>
+          {theme ? <FaSun size={20} /> : <FaMoon size={20} />}
+        </button>
+      </div>
     </div>
   );
 };
